@@ -25,7 +25,13 @@ namespace eWorkShopAPI.Entity
         public Nullable<bool> IsArchived { get; set; }
         public string Email { get; set; }
         public Nullable<int> UserTypeId { get; set; }
+        public Nullable<long> CustomerGroupID { get; set; }
+        public string Address { get; set; }
+        public string Zip { get; set; }
+        public Nullable<double> Km { get; set; }
+        public string Note { get; set; }
     
+        public virtual CustomerGroup CustomerGroup { get; set; }
         public virtual UserType UserType { get; set; }
     }
 }

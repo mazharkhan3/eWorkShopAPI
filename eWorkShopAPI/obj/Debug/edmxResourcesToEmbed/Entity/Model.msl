@@ -19,7 +19,6 @@
     <EntitySetMapping Name="CustomerGroups">
       <EntityTypeMapping TypeName="eWorkShop123Model.CustomerGroup">
         <MappingFragment StoreEntitySet="CustomerGroup">
-          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
           <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
           <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
@@ -104,6 +103,11 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="eWorkShop123Model.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Km" ColumnName="Km" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CustomerGroupID" ColumnName="CustomerGroupID" />
           <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />

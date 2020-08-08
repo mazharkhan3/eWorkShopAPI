@@ -17,7 +17,6 @@ namespace eWorkShopAPI.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
-            this.CustomerGroups = new HashSet<CustomerGroup>();
             this.Tickets = new HashSet<Ticket>();
         }
     
@@ -31,8 +30,6 @@ namespace eWorkShopAPI.Entity
         public Nullable<long> UpdatedBy { get; set; }
         public string IsArchived { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CustomerGroup> CustomerGroups { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ticket> Tickets { get; set; }
     }

@@ -25,7 +25,6 @@
     <Property Name="UpdatedDate" Type="datetime" />
     <Property Name="UpdatedBy" Type="bigint" />
     <Property Name="IsArchived" Type="bit" />
-    <Property Name="CustomerID" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="Products">
     <Key>
@@ -107,6 +106,11 @@
     <Property Name="IsArchived" Type="bit" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="UserTypeId" Type="int" />
+    <Property Name="CustomerGroupID" Type="bigint" />
+    <Property Name="Address" Type="nvarchar" MaxLength="80" />
+    <Property Name="Zip" Type="nvarchar" MaxLength="80" />
+    <Property Name="Km" Type="float" />
+    <Property Name="Note" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="UserTypes">
     <Key>
@@ -125,18 +129,6 @@
     <Property Name="WarningLimit" Type="bigint" Nullable="false" />
     <Property Name="IsSMS" Type="bit" Nullable="false" />
   </EntityType>
-  <Association Name="FK_CustomerGroup_Customer1">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-    <End Role="CustomerGroup" Type="Self.CustomerGroup" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="CustomerID" />
-      </Principal>
-      <Dependent Role="CustomerGroup">
-        <PropertyRef Name="CustomerID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ProductTicket_Products">
     <End Role="Products" Type="Self.Products" Multiplicity="1" />
     <End Role="ProductTicket" Type="Self.ProductTicket" Multiplicity="0..1" />
@@ -197,6 +189,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_User_User">
+    <End Role="CustomerGroup" Type="Self.CustomerGroup" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerGroup">
+        <PropertyRef Name="CustomerGroupID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="CustomerGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_User_UserTypes">
     <End Role="UserTypes" Type="Self.UserTypes" Multiplicity="0..1" />
     <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -233,10 +237,6 @@
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserTypes" EntityType="Self.UserTypes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Warning" EntityType="Self.Warning" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_CustomerGroup_Customer1" Association="Self.FK_CustomerGroup_Customer1">
-      <End Role="Customer" EntitySet="Customer" />
-      <End Role="CustomerGroup" EntitySet="CustomerGroup" />
-    </AssociationSet>
     <AssociationSet Name="FK_ProductTicket_Products" Association="Self.FK_ProductTicket_Products">
       <End Role="Products" EntitySet="Products" />
       <End Role="ProductTicket" EntitySet="ProductTicket" />
@@ -256,6 +256,10 @@
     <AssociationSet Name="FK_TicketTemplate_Ticket" Association="Self.FK_TicketTemplate_Ticket">
       <End Role="Ticket" EntitySet="Ticket" />
       <End Role="TicketTemplate" EntitySet="TicketTemplate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_User" Association="Self.FK_User_User">
+      <End Role="CustomerGroup" EntitySet="CustomerGroup" />
+      <End Role="User" EntitySet="User" />
     </AssociationSet>
     <AssociationSet Name="FK_User_UserTypes" Association="Self.FK_User_UserTypes">
       <End Role="UserTypes" EntitySet="UserTypes" />

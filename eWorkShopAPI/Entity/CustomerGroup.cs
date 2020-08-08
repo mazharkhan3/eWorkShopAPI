@@ -14,6 +14,12 @@ namespace eWorkShopAPI.Entity
     
     public partial class CustomerGroup
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CustomerGroup()
+        {
+            this.Users = new HashSet<User>();
+        }
+    
         public long CustomerGroupID { get; set; }
         public string GroupName { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
@@ -21,8 +27,8 @@ namespace eWorkShopAPI.Entity
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<long> UpdatedBy { get; set; }
         public Nullable<bool> IsArchived { get; set; }
-        public long CustomerID { get; set; }
     
-        public virtual Customer Customer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

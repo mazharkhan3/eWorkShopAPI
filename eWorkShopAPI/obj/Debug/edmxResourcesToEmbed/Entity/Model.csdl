@@ -12,13 +12,13 @@
     <EntitySet Name="Users" EntityType="eWorkShop123Model.User" />
     <EntitySet Name="UserTypes" EntityType="eWorkShop123Model.UserType" />
     <EntitySet Name="Warnings" EntityType="eWorkShop123Model.Warning" />
-    <AssociationSet Name="FK_CustomerGroup_Customer1" Association="eWorkShop123Model.FK_CustomerGroup_Customer1">
-      <End Role="Customer" EntitySet="Customers" />
-      <End Role="CustomerGroup" EntitySet="CustomerGroups" />
-    </AssociationSet>
     <AssociationSet Name="FK_Ticket_Customer" Association="eWorkShop123Model.FK_Ticket_Customer">
       <End Role="Customer" EntitySet="Customers" />
       <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_User" Association="eWorkShop123Model.FK_User_User">
+      <End Role="CustomerGroup" EntitySet="CustomerGroups" />
+      <End Role="User" EntitySet="Users" />
     </AssociationSet>
     <AssociationSet Name="FK_ProductTicket_Products" Association="eWorkShop123Model.FK_ProductTicket_Products">
       <End Role="Product" EntitySet="Products" />
@@ -58,7 +58,6 @@
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="UpdatedBy" Type="Int64" />
     <Property Name="IsArchived" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <NavigationProperty Name="CustomerGroups" Relationship="eWorkShop123Model.FK_CustomerGroup_Customer1" FromRole="Customer" ToRole="CustomerGroup" />
     <NavigationProperty Name="Tickets" Relationship="eWorkShop123Model.FK_Ticket_Customer" FromRole="Customer" ToRole="Ticket" />
   </EntityType>
   <EntityType Name="CustomerGroup">
@@ -72,8 +71,7 @@
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="UpdatedBy" Type="Int64" />
     <Property Name="IsArchived" Type="Boolean" />
-    <Property Name="CustomerID" Type="Int64" Nullable="false" />
-    <NavigationProperty Name="Customer" Relationship="eWorkShop123Model.FK_CustomerGroup_Customer1" FromRole="CustomerGroup" ToRole="Customer" />
+    <NavigationProperty Name="Users" Relationship="eWorkShop123Model.FK_User_User" FromRole="CustomerGroup" ToRole="User" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -165,7 +163,13 @@
     <Property Name="IsArchived" Type="Boolean" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UserTypeId" Type="Int32" />
+    <Property Name="CustomerGroupID" Type="Int64" />
+    <NavigationProperty Name="CustomerGroup" Relationship="eWorkShop123Model.FK_User_User" FromRole="User" ToRole="CustomerGroup" />
     <NavigationProperty Name="UserType" Relationship="eWorkShop123Model.FK_User_UserTypes" FromRole="User" ToRole="UserType" />
+    <Property Name="Address" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="Zip" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="Km" Type="Double" />
+    <Property Name="Note" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="UserType">
     <Key>
@@ -186,18 +190,6 @@
     <Property Name="IsSMS" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Product" Relationship="eWorkShop123Model.FK_Warning_Products1" FromRole="Warning" ToRole="Product" />
   </EntityType>
-  <Association Name="FK_CustomerGroup_Customer1">
-    <End Type="eWorkShop123Model.Customer" Role="Customer" Multiplicity="1" />
-    <End Type="eWorkShop123Model.CustomerGroup" Role="CustomerGroup" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="CustomerID" />
-      </Principal>
-      <Dependent Role="CustomerGroup">
-        <PropertyRef Name="CustomerID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Ticket_Customer">
     <End Type="eWorkShop123Model.Customer" Role="Customer" Multiplicity="1" />
     <End Type="eWorkShop123Model.Ticket" Role="Ticket" Multiplicity="*" />
@@ -207,6 +199,18 @@
       </Principal>
       <Dependent Role="Ticket">
         <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_User">
+    <End Type="eWorkShop123Model.CustomerGroup" Role="CustomerGroup" Multiplicity="0..1" />
+    <End Type="eWorkShop123Model.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerGroup">
+        <PropertyRef Name="CustomerGroupID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="CustomerGroupID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
