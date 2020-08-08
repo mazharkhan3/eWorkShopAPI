@@ -1,0 +1,725 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="eWorkShop123Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Email" Type="varchar(max)" Nullable="false" />
+          <Property Name="Address" Type="varchar(max)" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="IsArchived" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="CustomerGroup">
+          <Key>
+            <PropertyRef Name="CustomerGroupID" />
+          </Key>
+          <Property Name="CustomerGroupID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="varchar(max)" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="IsArchived" Type="bit" />
+          <Property Name="CustomerID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Quantity" Type="bigint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="IsArchived" Type="bit" />
+        </EntityType>
+        <EntityType Name="ProductTicket">
+          <Key>
+            <PropertyRef Name="ProductTicketID" />
+          </Key>
+          <Property Name="ProductTicketID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="bigint" Nullable="false" />
+          <Property Name="TicketID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TemplateType">
+          <Key>
+            <PropertyRef Name="TemplateTypeID" />
+          </Key>
+          <Property Name="TemplateTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Front" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Other" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rear" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="TicketID" />
+          </Key>
+          <Property Name="TicketID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="bigint" Nullable="false" />
+          <Property Name="Deccription" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="PickupTime" Type="datetime" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="bigint" />
+          <Property Name="IsArchived" Type="bit" />
+          <Property Name="NoteID" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="TicketTemplate">
+          <Key>
+            <PropertyRef Name="TicketTemplateID" />
+          </Key>
+          <Property Name="TicketTemplateID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TemplateTypeID" Type="bigint" Nullable="false" />
+          <Property Name="TicketID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phonenumber" Type="bigint" Nullable="false" />
+          <Property Name="Password" Type="bigint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="datetime" />
+          <Property Name="IsArchived" Type="bit" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="UserTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Warning">
+          <Key>
+            <PropertyRef Name="WarningID" />
+          </Key>
+          <Property Name="WarningID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="bigint" Nullable="false" />
+          <Property Name="Quantity" Type="bigint" Nullable="false" />
+          <Property Name="WarningLimit" Type="bigint" Nullable="false" />
+          <Property Name="IsSMS" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CustomerGroup_Customer1">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="CustomerGroup" Type="Self.CustomerGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CustomerGroup">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductTicket_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ProductTicket" Type="Self.ProductTicket" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductTicket">
+              <PropertyRef Name="ProductTicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductTicket_Ticket1">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="1" />
+          <End Role="ProductTicket" Type="Self.ProductTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="ProductTicket">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketTemplate_TemplateType1">
+          <End Role="TemplateType" Type="Self.TemplateType" Multiplicity="1" />
+          <End Role="TicketTemplate" Type="Self.TicketTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TemplateType">
+              <PropertyRef Name="TemplateTypeID" />
+            </Principal>
+            <Dependent Role="TicketTemplate">
+              <PropertyRef Name="TemplateTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketTemplate_Ticket">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+          <End Role="TicketTemplate" Type="Self.TicketTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="TicketTemplate">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserTypes">
+          <End Role="UserTypes" Type="Self.UserTypes" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warning_Products1">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Warning" Type="Self.Warning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Warning">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="eWorkShop123ModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerGroup" EntityType="Self.CustomerGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductTicket" EntityType="Self.ProductTicket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemplateType" EntityType="Self.TemplateType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketTemplate" EntityType="Self.TicketTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTypes" EntityType="Self.UserTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warning" EntityType="Self.Warning" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CustomerGroup_Customer1" Association="Self.FK_CustomerGroup_Customer1">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CustomerGroup" EntitySet="CustomerGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductTicket_Products" Association="Self.FK_ProductTicket_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductTicket" EntitySet="ProductTicket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductTicket_Ticket1" Association="Self.FK_ProductTicket_Ticket1">
+            <End Role="Ticket" EntitySet="Ticket" />
+            <End Role="ProductTicket" EntitySet="ProductTicket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Customer" Association="Self.FK_Ticket_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketTemplate_TemplateType1" Association="Self.FK_TicketTemplate_TemplateType1">
+            <End Role="TemplateType" EntitySet="TemplateType" />
+            <End Role="TicketTemplate" EntitySet="TicketTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketTemplate_Ticket" Association="Self.FK_TicketTemplate_Ticket">
+            <End Role="Ticket" EntitySet="Ticket" />
+            <End Role="TicketTemplate" EntitySet="TicketTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserTypes" Association="Self.FK_User_UserTypes">
+            <End Role="UserTypes" EntitySet="UserTypes" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warning_Products1" Association="Self.FK_Warning_Products1">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Warning" EntitySet="Warning" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="eWorkShop123Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="eWorkShop123Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="eWorkShop123Model.Customer" />
+          <EntitySet Name="CustomerGroups" EntityType="eWorkShop123Model.CustomerGroup" />
+          <EntitySet Name="Products" EntityType="eWorkShop123Model.Product" />
+          <EntitySet Name="ProductTickets" EntityType="eWorkShop123Model.ProductTicket" />
+          <EntitySet Name="sysdiagrams" EntityType="eWorkShop123Model.sysdiagram" />
+          <EntitySet Name="TemplateTypes" EntityType="eWorkShop123Model.TemplateType" />
+          <EntitySet Name="Tickets" EntityType="eWorkShop123Model.Ticket" />
+          <EntitySet Name="TicketTemplates" EntityType="eWorkShop123Model.TicketTemplate" />
+          <EntitySet Name="Users" EntityType="eWorkShop123Model.User" />
+          <EntitySet Name="UserTypes" EntityType="eWorkShop123Model.UserType" />
+          <EntitySet Name="Warnings" EntityType="eWorkShop123Model.Warning" />
+          <AssociationSet Name="FK_CustomerGroup_Customer1" Association="eWorkShop123Model.FK_CustomerGroup_Customer1">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CustomerGroup" EntitySet="CustomerGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Customer" Association="eWorkShop123Model.FK_Ticket_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductTicket_Products" Association="eWorkShop123Model.FK_ProductTicket_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductTicket" EntitySet="ProductTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warning_Products1" Association="eWorkShop123Model.FK_Warning_Products1">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Warning" EntitySet="Warnings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductTicket_Ticket1" Association="eWorkShop123Model.FK_ProductTicket_Ticket1">
+            <End Role="Ticket" EntitySet="Tickets" />
+            <End Role="ProductTicket" EntitySet="ProductTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketTemplate_TemplateType1" Association="eWorkShop123Model.FK_TicketTemplate_TemplateType1">
+            <End Role="TemplateType" EntitySet="TemplateTypes" />
+            <End Role="TicketTemplate" EntitySet="TicketTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketTemplate_Ticket" Association="eWorkShop123Model.FK_TicketTemplate_Ticket">
+            <End Role="Ticket" EntitySet="Tickets" />
+            <End Role="TicketTemplate" EntitySet="TicketTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserTypes" Association="eWorkShop123Model.FK_User_UserTypes">
+            <End Role="UserType" EntitySet="UserTypes" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="IsArchived" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="CustomerGroups" Relationship="eWorkShop123Model.FK_CustomerGroup_Customer1" FromRole="Customer" ToRole="CustomerGroup" />
+          <NavigationProperty Name="Tickets" Relationship="eWorkShop123Model.FK_Ticket_Customer" FromRole="Customer" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="CustomerGroup">
+          <Key>
+            <PropertyRef Name="CustomerGroupID" />
+          </Key>
+          <Property Name="CustomerGroupID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="IsArchived" Type="Boolean" />
+          <Property Name="CustomerID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="eWorkShop123Model.FK_CustomerGroup_Customer1" FromRole="CustomerGroup" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="Int64" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="IsArchived" Type="Boolean" />
+          <NavigationProperty Name="ProductTicket" Relationship="eWorkShop123Model.FK_ProductTicket_Products" FromRole="Product" ToRole="ProductTicket" />
+          <NavigationProperty Name="Warnings" Relationship="eWorkShop123Model.FK_Warning_Products1" FromRole="Product" ToRole="Warning" />
+        </EntityType>
+        <EntityType Name="ProductTicket">
+          <Key>
+            <PropertyRef Name="ProductTicketID" />
+          </Key>
+          <Property Name="ProductTicketID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int64" Nullable="false" />
+          <Property Name="TicketID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="eWorkShop123Model.FK_ProductTicket_Products" FromRole="ProductTicket" ToRole="Product" />
+          <NavigationProperty Name="Ticket" Relationship="eWorkShop123Model.FK_ProductTicket_Ticket1" FromRole="ProductTicket" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TemplateType">
+          <Key>
+            <PropertyRef Name="TemplateTypeID" />
+          </Key>
+          <Property Name="TemplateTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Front" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Other" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rear" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TicketTemplates" Relationship="eWorkShop123Model.FK_TicketTemplate_TemplateType1" FromRole="TemplateType" ToRole="TicketTemplate" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="TicketID" />
+          </Key>
+          <Property Name="TicketID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int64" Nullable="false" />
+          <Property Name="Deccription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PickupTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int64" />
+          <Property Name="IsArchived" Type="Boolean" />
+          <Property Name="NoteID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="eWorkShop123Model.FK_Ticket_Customer" FromRole="Ticket" ToRole="Customer" />
+          <NavigationProperty Name="ProductTickets" Relationship="eWorkShop123Model.FK_ProductTicket_Ticket1" FromRole="Ticket" ToRole="ProductTicket" />
+          <NavigationProperty Name="TicketTemplates" Relationship="eWorkShop123Model.FK_TicketTemplate_Ticket" FromRole="Ticket" ToRole="TicketTemplate" />
+        </EntityType>
+        <EntityType Name="TicketTemplate">
+          <Key>
+            <PropertyRef Name="TicketTemplateID" />
+          </Key>
+          <Property Name="TicketTemplateID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TemplateTypeID" Type="Int64" Nullable="false" />
+          <Property Name="TicketID" Type="Int64" />
+          <NavigationProperty Name="TemplateType" Relationship="eWorkShop123Model.FK_TicketTemplate_TemplateType1" FromRole="TicketTemplate" ToRole="TemplateType" />
+          <NavigationProperty Name="Ticket" Relationship="eWorkShop123Model.FK_TicketTemplate_Ticket" FromRole="TicketTemplate" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phonenumber" Type="Int64" Nullable="false" />
+          <Property Name="Password" Type="Int64" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="DateTime" Precision="3" />
+          <Property Name="IsArchived" Type="Boolean" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserTypeId" Type="Int32" />
+          <NavigationProperty Name="UserType" Relationship="eWorkShop123Model.FK_User_UserTypes" FromRole="User" ToRole="UserType" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="eWorkShop123Model.FK_User_UserTypes" FromRole="UserType" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Warning">
+          <Key>
+            <PropertyRef Name="WarningID" />
+          </Key>
+          <Property Name="WarningID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int64" Nullable="false" />
+          <Property Name="Quantity" Type="Int64" Nullable="false" />
+          <Property Name="WarningLimit" Type="Int64" Nullable="false" />
+          <Property Name="IsSMS" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="eWorkShop123Model.FK_Warning_Products1" FromRole="Warning" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_CustomerGroup_Customer1">
+          <End Type="eWorkShop123Model.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="eWorkShop123Model.CustomerGroup" Role="CustomerGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CustomerGroup">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Customer">
+          <End Type="eWorkShop123Model.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="eWorkShop123Model.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductTicket_Products">
+          <End Type="eWorkShop123Model.Product" Role="Product" Multiplicity="1" />
+          <End Type="eWorkShop123Model.ProductTicket" Role="ProductTicket" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductTicket">
+              <PropertyRef Name="ProductTicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warning_Products1">
+          <End Type="eWorkShop123Model.Product" Role="Product" Multiplicity="1" />
+          <End Type="eWorkShop123Model.Warning" Role="Warning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Warning">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductTicket_Ticket1">
+          <End Type="eWorkShop123Model.Ticket" Role="Ticket" Multiplicity="1" />
+          <End Type="eWorkShop123Model.ProductTicket" Role="ProductTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="ProductTicket">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketTemplate_TemplateType1">
+          <End Type="eWorkShop123Model.TemplateType" Role="TemplateType" Multiplicity="1" />
+          <End Type="eWorkShop123Model.TicketTemplate" Role="TicketTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TemplateType">
+              <PropertyRef Name="TemplateTypeID" />
+            </Principal>
+            <Dependent Role="TicketTemplate">
+              <PropertyRef Name="TemplateTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketTemplate_Ticket">
+          <End Type="eWorkShop123Model.Ticket" Role="Ticket" Multiplicity="0..1" />
+          <End Type="eWorkShop123Model.TicketTemplate" Role="TicketTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="TicketTemplate">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserTypes">
+          <End Type="eWorkShop123Model.UserType" Role="UserType" Multiplicity="0..1" />
+          <End Type="eWorkShop123Model.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="UserTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="eWorkShop123ModelStoreContainer" CdmEntityContainer="eWorkShop123Entities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="eWorkShop123Model.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerGroups">
+            <EntityTypeMapping TypeName="eWorkShop123Model.CustomerGroup">
+              <MappingFragment StoreEntitySet="CustomerGroup">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="CustomerGroupID" ColumnName="CustomerGroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="eWorkShop123Model.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductTickets">
+            <EntityTypeMapping TypeName="eWorkShop123Model.ProductTicket">
+              <MappingFragment StoreEntitySet="ProductTicket">
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductTicketID" ColumnName="ProductTicketID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="eWorkShop123Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemplateTypes">
+            <EntityTypeMapping TypeName="eWorkShop123Model.TemplateType">
+              <MappingFragment StoreEntitySet="TemplateType">
+                <ScalarProperty Name="Rear" ColumnName="Rear" />
+                <ScalarProperty Name="Other" ColumnName="Other" />
+                <ScalarProperty Name="Front" ColumnName="Front" />
+                <ScalarProperty Name="TemplateTypeID" ColumnName="TemplateTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="eWorkShop123Model.Ticket">
+              <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="NoteID" ColumnName="NoteID" />
+                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PickupTime" ColumnName="PickupTime" />
+                <ScalarProperty Name="Deccription" ColumnName="Deccription" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketTemplates">
+            <EntityTypeMapping TypeName="eWorkShop123Model.TicketTemplate">
+              <MappingFragment StoreEntitySet="TicketTemplate">
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+                <ScalarProperty Name="TemplateTypeID" ColumnName="TemplateTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TicketTemplateID" ColumnName="TicketTemplateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="eWorkShop123Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypes">
+            <EntityTypeMapping TypeName="eWorkShop123Model.UserType">
+              <MappingFragment StoreEntitySet="UserTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warnings">
+            <EntityTypeMapping TypeName="eWorkShop123Model.Warning">
+              <MappingFragment StoreEntitySet="Warning">
+                <ScalarProperty Name="IsSMS" ColumnName="IsSMS" />
+                <ScalarProperty Name="WarningLimit" ColumnName="WarningLimit" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="WarningID" ColumnName="WarningID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

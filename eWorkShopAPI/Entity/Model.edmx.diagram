@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4d2a2ba648d9446eb8f953c1c33a9a20" Name="Diagram1">
+        <EntityTypeShape EntityType="eWorkShop123Model.Customer" Width="1.5" PointX="0.75" PointY="4.875" />
+        <EntityTypeShape EntityType="eWorkShop123Model.CustomerGroup" Width="1.5" PointX="3" PointY="7.25" />
+        <EntityTypeShape EntityType="eWorkShop123Model.Product" Width="1.5" PointX="3" PointY="11.625" />
+        <EntityTypeShape EntityType="eWorkShop123Model.ProductTicket" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="eWorkShop123Model.sysdiagram" Width="1.5" PointX="7.75" PointY="1.75" />
+        <EntityTypeShape EntityType="eWorkShop123Model.TemplateType" Width="1.5" PointX="3" PointY="15.75" />
+        <EntityTypeShape EntityType="eWorkShop123Model.Ticket" Width="1.5" PointX="3" PointY="3" />
+        <EntityTypeShape EntityType="eWorkShop123Model.TicketTemplate" Width="1.5" PointX="5.25" PointY="3.625" />
+        <EntityTypeShape EntityType="eWorkShop123Model.User" Width="1.5" PointX="8" PointY="7" />
+        <EntityTypeShape EntityType="eWorkShop123Model.UserType" Width="1.5" PointX="5.75" PointY="7.875" />
+        <EntityTypeShape EntityType="eWorkShop123Model.Warning" Width="1.5" PointX="5.25" PointY="12.125" />
+        <AssociationConnector Association="eWorkShop123Model.FK_CustomerGroup_Customer1" />
+        <AssociationConnector Association="eWorkShop123Model.FK_Ticket_Customer" />
+        <AssociationConnector Association="eWorkShop123Model.FK_ProductTicket_Products" />
+        <AssociationConnector Association="eWorkShop123Model.FK_Warning_Products1" />
+        <AssociationConnector Association="eWorkShop123Model.FK_ProductTicket_Ticket1" />
+        <AssociationConnector Association="eWorkShop123Model.FK_TicketTemplate_TemplateType1" />
+        <AssociationConnector Association="eWorkShop123Model.FK_TicketTemplate_Ticket" />
+        <AssociationConnector Association="eWorkShop123Model.FK_User_UserTypes" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
