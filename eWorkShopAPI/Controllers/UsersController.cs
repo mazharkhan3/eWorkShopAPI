@@ -52,6 +52,9 @@ namespace eWorkShopAPI.Controllers
         return BadRequest();
       }
 
+      user.UpdatedDate = DateTime.Now;
+      user.UpdatedBy = DateTime.Now;
+
       db.Entry(user).State = EntityState.Modified;
 
       try
@@ -78,12 +81,12 @@ namespace eWorkShopAPI.Controllers
     public IHttpActionResult SaveUser(User user)
     {
       if (!ModelState.IsValid)
-      {
+        {
         return BadRequest(ModelState);
       }
 
       user.CreatedDate = DateTime.Now;
-      user.CreatedBy = 1;
+      user.CreatedBy = (int)EUserTypes.Admin;
       user.UpdatedDate = DateTime.Now;
       user.UpdatedBy = DateTime.Now;
       user.IsArchived = false;
@@ -96,7 +99,7 @@ namespace eWorkShopAPI.Controllers
     }
 
     // DELETE: api/Users/5
-    [HttpPost]
+    [HttpGet]
     public IHttpActionResult DeleteUser(long id)
     {
       User user = db.Users.Find(id);

@@ -67,6 +67,7 @@
     <EntitySetMapping Name="TemplateTypes">
       <EntityTypeMapping TypeName="eWorkShop123Model.TemplateType">
         <MappingFragment StoreEntitySet="TemplateType">
+          <ScalarProperty Name="TicketID" ColumnName="TicketID" />
           <ScalarProperty Name="Rear" ColumnName="Rear" />
           <ScalarProperty Name="Other" ColumnName="Other" />
           <ScalarProperty Name="Front" ColumnName="Front" />
@@ -77,7 +78,6 @@
     <EntitySetMapping Name="Tickets">
       <EntityTypeMapping TypeName="eWorkShop123Model.Ticket">
         <MappingFragment StoreEntitySet="Ticket">
-          <ScalarProperty Name="NoteID" ColumnName="NoteID" />
           <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
           <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
@@ -138,6 +138,19 @@
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="WarningID" ColumnName="WarningID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TicketInvoices">
+      <EntityTypeMapping TypeName="eWorkShop123Model.TicketInvoice">
+        <MappingFragment StoreEntitySet="TicketInvoice">
+          <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Unit_Cost" ColumnName="Unit Cost" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Item" ColumnName="Item" />
+          <ScalarProperty Name="TicketInvoiceID" ColumnName="TicketInvoiceID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

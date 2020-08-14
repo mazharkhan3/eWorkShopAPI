@@ -63,9 +63,10 @@
       <PropertyRef Name="TemplateTypeID" />
     </Key>
     <Property Name="TemplateTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Front" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Other" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Rear" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Front" Type="nvarchar(max)" />
+    <Property Name="Other" Type="nvarchar(max)" />
+    <Property Name="Rear" Type="nvarchar(max)" />
+    <Property Name="TicketID" Type="bigint" />
   </EntityType>
   <EntityType Name="Ticket">
     <Key>
@@ -80,7 +81,18 @@
     <Property Name="UpdatedDate" Type="datetime" />
     <Property Name="UpdatedBy" Type="bigint" />
     <Property Name="IsArchived" Type="bit" />
-    <Property Name="NoteID" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="TicketInvoice">
+    <Key>
+      <PropertyRef Name="TicketInvoiceID" />
+    </Key>
+    <Property Name="TicketInvoiceID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Item" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Unit Cost" Type="float" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Discount" Type="float" />
+    <Property Name="TicketID" Type="bigint" />
   </EntityType>
   <EntityType Name="TicketTemplate">
     <Key>
@@ -98,7 +110,7 @@
     <Property Name="UserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Phonenumber" Type="bigint" Nullable="false" />
-    <Property Name="Password" Type="bigint" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" />
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="CreatedBy" Type="bigint" />
     <Property Name="UpdatedDate" Type="datetime" />
@@ -153,27 +165,39 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TemplateType_Ticket">
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+    <End Role="TemplateType" Type="Self.TemplateType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="TicketID" />
+      </Principal>
+      <Dependent Role="TemplateType">
+        <PropertyRef Name="TicketID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Ticket_Customer">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="1" />
     <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="CustomerID" />
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
       </Principal>
       <Dependent Role="Ticket">
         <PropertyRef Name="CustomerID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TicketTemplate_TemplateType1">
-    <End Role="TemplateType" Type="Self.TemplateType" Multiplicity="1" />
-    <End Role="TicketTemplate" Type="Self.TicketTemplate" Multiplicity="*" />
+  <Association Name="FK_TicketInvoice_Ticket">
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+    <End Role="TicketInvoice" Type="Self.TicketInvoice" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="TemplateType">
-        <PropertyRef Name="TemplateTypeID" />
+      <Principal Role="Ticket">
+        <PropertyRef Name="TicketID" />
       </Principal>
-      <Dependent Role="TicketTemplate">
-        <PropertyRef Name="TemplateTypeID" />
+      <Dependent Role="TicketInvoice">
+        <PropertyRef Name="TicketID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -233,6 +257,7 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TemplateType" EntityType="Self.TemplateType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TicketInvoice" EntityType="Self.TicketInvoice" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TicketTemplate" EntityType="Self.TicketTemplate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserTypes" EntityType="Self.UserTypes" Schema="dbo" store:Type="Tables" />
@@ -245,13 +270,17 @@
       <End Role="Ticket" EntitySet="Ticket" />
       <End Role="ProductTicket" EntitySet="ProductTicket" />
     </AssociationSet>
+    <AssociationSet Name="FK_TemplateType_Ticket" Association="Self.FK_TemplateType_Ticket">
+      <End Role="Ticket" EntitySet="Ticket" />
+      <End Role="TemplateType" EntitySet="TemplateType" />
+    </AssociationSet>
     <AssociationSet Name="FK_Ticket_Customer" Association="Self.FK_Ticket_Customer">
-      <End Role="Customer" EntitySet="Customer" />
+      <End Role="User" EntitySet="User" />
       <End Role="Ticket" EntitySet="Ticket" />
     </AssociationSet>
-    <AssociationSet Name="FK_TicketTemplate_TemplateType1" Association="Self.FK_TicketTemplate_TemplateType1">
-      <End Role="TemplateType" EntitySet="TemplateType" />
-      <End Role="TicketTemplate" EntitySet="TicketTemplate" />
+    <AssociationSet Name="FK_TicketInvoice_Ticket" Association="Self.FK_TicketInvoice_Ticket">
+      <End Role="Ticket" EntitySet="Ticket" />
+      <End Role="TicketInvoice" EntitySet="TicketInvoice" />
     </AssociationSet>
     <AssociationSet Name="FK_TicketTemplate_Ticket" Association="Self.FK_TicketTemplate_Ticket">
       <End Role="Ticket" EntitySet="Ticket" />

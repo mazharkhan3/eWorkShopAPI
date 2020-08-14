@@ -18,7 +18,9 @@ namespace eWorkShopAPI.Entity
         public Ticket()
         {
             this.ProductTickets = new HashSet<ProductTicket>();
+            this.TemplateTypes = new HashSet<TemplateType>();
             this.TicketTemplates = new HashSet<TicketTemplate>();
+            this.TicketInvoices = new HashSet<TicketInvoice>();
         }
     
         public long TicketID { get; set; }
@@ -30,12 +32,16 @@ namespace eWorkShopAPI.Entity
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<long> UpdatedBy { get; set; }
         public Nullable<bool> IsArchived { get; set; }
-        public string NoteID { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductTicket> ProductTickets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TemplateType> TemplateTypes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TicketTemplate> TicketTemplates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TicketInvoice> TicketInvoices { get; set; }
+        public virtual User User { get; set; }
     }
 }

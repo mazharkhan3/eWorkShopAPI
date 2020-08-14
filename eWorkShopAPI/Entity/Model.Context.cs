@@ -37,5 +37,6 @@ namespace eWorkShopAPI.Entity
     public virtual DbSet<User> Users { get; set; }
     public virtual DbSet<UserType> UserTypes { get; set; }
     public virtual DbSet<Warning> Warnings { get; set; }
+    public virtual DbSet<TicketInvoice> TicketInvoices { get; set; }
   }
 }

@@ -51,8 +51,9 @@ namespace eWorkShopAPI.Controllers
         //}
         else
         {
+
           // fetch the user
-          var userObj = dbContext.Users.FirstOrDefault(x => x.Email == user.Email && x.Password == user.Password && x.IsArchived == false);
+          var userObj = dbContext.Users.FirstOrDefault(x => x.Email == user.Email && x.IsArchived == false);
 
           if (userObj != null)
           {

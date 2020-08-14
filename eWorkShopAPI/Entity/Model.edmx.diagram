@@ -5,25 +5,28 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4d2a2ba648d9446eb8f953c1c33a9a20" Name="Diagram1">
-        <EntityTypeShape EntityType="eWorkShop123Model.Customer" Width="1.5" PointX="0.75" PointY="3.375" />
-        <EntityTypeShape EntityType="eWorkShop123Model.CustomerGroup" Width="1.5" PointX="5.75" PointY="7.875" />
-        <EntityTypeShape EntityType="eWorkShop123Model.Product" Width="1.5" PointX="3" PointY="11.25" />
-        <EntityTypeShape EntityType="eWorkShop123Model.ProductTicket" Width="1.5" PointX="5.25" PointY="3.875" />
-        <EntityTypeShape EntityType="eWorkShop123Model.sysdiagram" Width="1.5" PointX="7.75" PointY="2.125" />
-        <EntityTypeShape EntityType="eWorkShop123Model.TemplateType" Width="1.5" PointX="3" PointY="7.625" />
-        <EntityTypeShape EntityType="eWorkShop123Model.Ticket" Width="1.5" PointX="3" PointY="3.125" />
-        <EntityTypeShape EntityType="eWorkShop123Model.TicketTemplate" Width="1.5" PointX="5.25" PointY="0.75" />
-        <EntityTypeShape EntityType="eWorkShop123Model.User" Width="1.5" PointX="8" PointY="7.375" />
-        <EntityTypeShape EntityType="eWorkShop123Model.UserType" Width="1.5" PointX="5.75" PointY="11.375" />
-        <EntityTypeShape EntityType="eWorkShop123Model.Warning" Width="1.5" PointX="5.25" PointY="13.75" />
+        <EntityTypeShape EntityType="eWorkShop123Model.Customer" Width="1.5" PointX="0.75" PointY="5.875" />
+        <EntityTypeShape EntityType="eWorkShop123Model.CustomerGroup" Width="1.5" PointX="7.75" PointY="1.25" />
+        <EntityTypeShape EntityType="eWorkShop123Model.Product" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="eWorkShop123Model.ProductTicket" Width="1.5" PointX="5.25" PointY="4.375" />
+        <EntityTypeShape EntityType="eWorkShop123Model.sysdiagram" Width="1.5" PointX="0.75" PointY="10" />
+        <EntityTypeShape EntityType="eWorkShop123Model.TemplateType" Width="1.5" PointX="5.25" PointY="7.625" />
+        <EntityTypeShape EntityType="eWorkShop123Model.Ticket" Width="1.5" PointX="3" PointY="5.5" />
+        <EntityTypeShape EntityType="eWorkShop123Model.TicketTemplate" Width="1.5" PointX="5.25" PointY="10.5" />
+        <EntityTypeShape EntityType="eWorkShop123Model.User" Width="1.5" PointX="10" PointY="3.375" />
+        <EntityTypeShape EntityType="eWorkShop123Model.UserType" Width="1.5" PointX="7.75" PointY="4.75" />
+        <EntityTypeShape EntityType="eWorkShop123Model.Warning" Width="1.5" PointX="5.25" PointY="1.25" />
         <AssociationConnector Association="eWorkShop123Model.FK_Ticket_Customer" />
         <AssociationConnector Association="eWorkShop123Model.FK_User_User" />
         <AssociationConnector Association="eWorkShop123Model.FK_ProductTicket_Products" />
         <AssociationConnector Association="eWorkShop123Model.FK_Warning_Products1" />
         <AssociationConnector Association="eWorkShop123Model.FK_ProductTicket_Ticket1" />
-        <AssociationConnector Association="eWorkShop123Model.FK_TicketTemplate_TemplateType1" />
+        <AssociationConnector Association="eWorkShop123Model.FK_TemplateType_Ticket" />
         <AssociationConnector Association="eWorkShop123Model.FK_TicketTemplate_Ticket" />
         <AssociationConnector Association="eWorkShop123Model.FK_User_UserTypes" />
+        <EntityTypeShape EntityType="eWorkShop123Model.TicketInvoice" Width="1.5" PointX="5.25" PointY="14.125" />
+        <AssociationConnector Association="eWorkShop123Model.FK_TicketInvoice_Ticket" />
+        <AssociationConnector Association="eWorkShop123Model.FK_Ticket_Customer1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

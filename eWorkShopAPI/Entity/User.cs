@@ -14,10 +14,16 @@ namespace eWorkShopAPI.Entity
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Tickets = new HashSet<Ticket>();
+        }
+    
         public long UserID { get; set; }
         public string Username { get; set; }
         public long Phonenumber { get; set; }
-        public long Password { get; set; }
+        public string Password { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<long> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
@@ -33,5 +39,7 @@ namespace eWorkShopAPI.Entity
     
         public virtual CustomerGroup CustomerGroup { get; set; }
         public virtual UserType UserType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

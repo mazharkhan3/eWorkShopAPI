@@ -32,9 +32,9 @@
       <End Role="Ticket" EntitySet="Tickets" />
       <End Role="ProductTicket" EntitySet="ProductTickets" />
     </AssociationSet>
-    <AssociationSet Name="FK_TicketTemplate_TemplateType1" Association="eWorkShop123Model.FK_TicketTemplate_TemplateType1">
+    <AssociationSet Name="FK_TemplateType_Ticket" Association="eWorkShop123Model.FK_TemplateType_Ticket">
+      <End Role="Ticket" EntitySet="Tickets" />
       <End Role="TemplateType" EntitySet="TemplateTypes" />
-      <End Role="TicketTemplate" EntitySet="TicketTemplates" />
     </AssociationSet>
     <AssociationSet Name="FK_TicketTemplate_Ticket" Association="eWorkShop123Model.FK_TicketTemplate_Ticket">
       <End Role="Ticket" EntitySet="Tickets" />
@@ -43,6 +43,15 @@
     <AssociationSet Name="FK_User_UserTypes" Association="eWorkShop123Model.FK_User_UserTypes">
       <End Role="UserType" EntitySet="UserTypes" />
       <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <EntitySet Name="TicketInvoices" EntityType="eWorkShop123Model.TicketInvoice" />
+    <AssociationSet Name="FK_TicketInvoice_Ticket" Association="eWorkShop123Model.FK_TicketInvoice_Ticket">
+      <End Role="Ticket" EntitySet="Tickets" />
+      <End Role="TicketInvoice" EntitySet="TicketInvoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Customer1" Association="eWorkShop123Model.FK_Ticket_Customer1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Ticket" EntitySet="Tickets" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Customer">
@@ -114,10 +123,11 @@
       <PropertyRef Name="TemplateTypeID" />
     </Key>
     <Property Name="TemplateTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Front" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Other" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Rear" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="TicketTemplates" Relationship="eWorkShop123Model.FK_TicketTemplate_TemplateType1" FromRole="TemplateType" ToRole="TicketTemplate" />
+    <Property Name="Front" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Rear" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TicketID" Type="Int64" />
+    <NavigationProperty Name="Ticket" Relationship="eWorkShop123Model.FK_TemplateType_Ticket" FromRole="TemplateType" ToRole="Ticket" />
   </EntityType>
   <EntityType Name="Ticket">
     <Key>
@@ -132,10 +142,12 @@
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="UpdatedBy" Type="Int64" />
     <Property Name="IsArchived" Type="Boolean" />
-    <Property Name="NoteID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Customer" Relationship="eWorkShop123Model.FK_Ticket_Customer" FromRole="Ticket" ToRole="Customer" />
     <NavigationProperty Name="ProductTickets" Relationship="eWorkShop123Model.FK_ProductTicket_Ticket1" FromRole="Ticket" ToRole="ProductTicket" />
+    <NavigationProperty Name="TemplateTypes" Relationship="eWorkShop123Model.FK_TemplateType_Ticket" FromRole="Ticket" ToRole="TemplateType" />
     <NavigationProperty Name="TicketTemplates" Relationship="eWorkShop123Model.FK_TicketTemplate_Ticket" FromRole="Ticket" ToRole="TicketTemplate" />
+    <NavigationProperty Name="TicketInvoices" Relationship="eWorkShop123Model.FK_TicketInvoice_Ticket" FromRole="Ticket" ToRole="TicketInvoice" />
+    <NavigationProperty Name="User" Relationship="eWorkShop123Model.FK_Ticket_Customer1" FromRole="Ticket" ToRole="User" />
   </EntityType>
   <EntityType Name="TicketTemplate">
     <Key>
@@ -145,7 +157,6 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="TemplateTypeID" Type="Int64" Nullable="false" />
     <Property Name="TicketID" Type="Int64" />
-    <NavigationProperty Name="TemplateType" Relationship="eWorkShop123Model.FK_TicketTemplate_TemplateType1" FromRole="TicketTemplate" ToRole="TemplateType" />
     <NavigationProperty Name="Ticket" Relationship="eWorkShop123Model.FK_TicketTemplate_Ticket" FromRole="TicketTemplate" ToRole="Ticket" />
   </EntityType>
   <EntityType Name="User">
@@ -155,7 +166,7 @@
     <Property Name="UserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Phonenumber" Type="Int64" Nullable="false" />
-    <Property Name="Password" Type="Int64" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
     <Property Name="CreatedBy" Type="Int64" />
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
@@ -164,12 +175,13 @@
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UserTypeId" Type="Int32" />
     <Property Name="CustomerGroupID" Type="Int64" />
-    <NavigationProperty Name="CustomerGroup" Relationship="eWorkShop123Model.FK_User_User" FromRole="User" ToRole="CustomerGroup" />
-    <NavigationProperty Name="UserType" Relationship="eWorkShop123Model.FK_User_UserTypes" FromRole="User" ToRole="UserType" />
     <Property Name="Address" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
     <Property Name="Zip" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
     <Property Name="Km" Type="Double" />
     <Property Name="Note" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CustomerGroup" Relationship="eWorkShop123Model.FK_User_User" FromRole="User" ToRole="CustomerGroup" />
+    <NavigationProperty Name="UserType" Relationship="eWorkShop123Model.FK_User_UserTypes" FromRole="User" ToRole="UserType" />
+    <NavigationProperty Name="Tickets" Relationship="eWorkShop123Model.FK_Ticket_Customer1" FromRole="User" ToRole="Ticket" />
   </EntityType>
   <EntityType Name="UserType">
     <Key>
@@ -250,15 +262,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TicketTemplate_TemplateType1">
-    <End Type="eWorkShop123Model.TemplateType" Role="TemplateType" Multiplicity="1" />
-    <End Type="eWorkShop123Model.TicketTemplate" Role="TicketTemplate" Multiplicity="*" />
+  <Association Name="FK_TemplateType_Ticket">
+    <End Type="eWorkShop123Model.Ticket" Role="Ticket" Multiplicity="0..1" />
+    <End Type="eWorkShop123Model.TemplateType" Role="TemplateType" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="TemplateType">
-        <PropertyRef Name="TemplateTypeID" />
+      <Principal Role="Ticket">
+        <PropertyRef Name="TicketID" />
       </Principal>
-      <Dependent Role="TicketTemplate">
-        <PropertyRef Name="TemplateTypeID" />
+      <Dependent Role="TemplateType">
+        <PropertyRef Name="TicketID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -283,6 +295,43 @@
       </Principal>
       <Dependent Role="User">
         <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TicketInvoice">
+    <Key>
+      <PropertyRef Name="TicketInvoiceID" />
+    </Key>
+    <Property Name="TicketInvoiceID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Item" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Unit_Cost" Type="Double" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Discount" Type="Double" />
+    <Property Name="TicketID" Type="Int64" />
+    <NavigationProperty Name="Ticket" Relationship="eWorkShop123Model.FK_TicketInvoice_Ticket" FromRole="TicketInvoice" ToRole="Ticket" />
+  </EntityType>
+  <Association Name="FK_TicketInvoice_Ticket">
+    <End Type="eWorkShop123Model.Ticket" Role="Ticket" Multiplicity="0..1" />
+    <End Type="eWorkShop123Model.TicketInvoice" Role="TicketInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="TicketID" />
+      </Principal>
+      <Dependent Role="TicketInvoice">
+        <PropertyRef Name="TicketID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_Customer1">
+    <End Type="eWorkShop123Model.User" Role="User" Multiplicity="1" />
+    <End Type="eWorkShop123Model.Ticket" Role="Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="CustomerID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

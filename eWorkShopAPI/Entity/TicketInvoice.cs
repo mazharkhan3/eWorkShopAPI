@@ -12,12 +12,14 @@ namespace eWorkShopAPI.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class TemplateType
+    public partial class TicketInvoice
     {
-        public long TemplateTypeID { get; set; }
-        public string Front { get; set; }
-        public string Other { get; set; }
-        public string Rear { get; set; }
+        public long TicketInvoiceID { get; set; }
+        public string Item { get; set; }
+        public string Description { get; set; }
+        public Nullable<double> Unit_Cost { get; set; }
+        public Nullable<int> Quantity { get; set; }
+        public Nullable<double> Discount { get; set; }
         public Nullable<long> TicketID { get; set; }
     
         public virtual Ticket Ticket { get; set; }
