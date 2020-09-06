@@ -154,5 +154,53 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_TotalOrdersByDay" FunctionName="eWorkShop123Model.Store.sp_TotalOrdersByDay">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eWorkShop123Model.sp_TotalOrdersByDay_Result">
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="TotalOrders" ColumnName="TotalOrders" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_TotalOrdersByMonth" FunctionName="eWorkShop123Model.Store.sp_TotalOrdersByMonth">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eWorkShop123Model.sp_TotalOrdersByMonth_Result">
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="TotalOrders" ColumnName="TotalOrders" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_TotalProductsByDay" FunctionName="eWorkShop123Model.Store.sp_TotalProductsByDay">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eWorkShop123Model.sp_TotalProductsByDay_Result">
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="TotalProducts" ColumnName="TotalProducts" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_TotalProductsByMonth" FunctionName="eWorkShop123Model.Store.sp_TotalProductsByMonth">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eWorkShop123Model.sp_TotalProductsByMonth_Result">
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="TotalProducts" ColumnName="TotalProducts" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_TotalSalesByDay" FunctionName="eWorkShop123Model.Store.sp_TotalSalesByDay">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eWorkShop123Model.sp_TotalSalesByDay_Result">
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="TotalProfit" ColumnName="TotalProfit" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_TotalSalesByMonth" FunctionName="eWorkShop123Model.Store.sp_TotalSalesByMonth">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eWorkShop123Model.sp_TotalSalesByMonth_Result">
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="TotalProfit" ColumnName="TotalProfit" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

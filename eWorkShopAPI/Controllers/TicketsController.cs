@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using eWorkShopAPI.Common;
 using eWorkShopAPI.Entity;
+using eWorkShopAPI.Models;
 
 namespace eWorkShopAPI.Controllers
 {
@@ -18,9 +19,21 @@ namespace eWorkShopAPI.Controllers
     private eWorkShop123Entities db = new eWorkShop123Entities();
 
     // GET: api/Tickets
-    public IQueryable<Ticket> GetTickets()
+    public List<TicketModel> GetTickets()
     {
-      return db.Tickets;
+      List<TicketModel> tickets = db.Tickets
+        .Include(x => x.Customer)
+        .Select(x => new TicketModel
+        {
+          TicketID = x.TicketID,
+          Description = x.Deccription,
+          CustomerName = x.Customer.Name,
+          PickUpTime = x.PickupTime,
+          TotalCost = x.TicketInvoices.Sum(y => y.Unit_Cost),
+        })
+        .ToList();
+
+      return tickets;
     }
 
     // GET: api/Tickets/5
@@ -73,7 +86,7 @@ namespace eWorkShopAPI.Controllers
 
     // POST: api/Tickets
     [HttpPost]
-    public IHttpActionResult SaveTicket(Ticket ticket, TemplateType templateTypes, TicketInvoice ticketInvoice)
+    public IHttpActionResult SaveTicket(Ticket ticket)
     {
       if (!ModelState.IsValid)
       {
@@ -89,7 +102,7 @@ namespace eWorkShopAPI.Controllers
       db.Tickets.Add(ticket);
       db.SaveChanges();
 
-      return CreatedAtRoute("DefaultApi", new { id = ticket.TicketID }, ticket);
+      return Ok();
     }
 
     // DELETE: api/Tickets/5
@@ -97,11 +110,16 @@ namespace eWorkShopAPI.Controllers
     public IHttpActionResult DeleteTicket(long id)
     {
       Ticket ticket = db.Tickets.Find(id);
+      List<TicketInvoice> ticketInvoice = db.TicketInvoices.Where(x => x.TicketID == id).ToList();
+      List<TemplateType> templateType = db.TemplateTypes.Where(x => x.TicketID == id).ToList();
+
       if (ticket == null)
       {
         return NotFound();
       }
 
+      db.TicketInvoices.RemoveRange(ticketInvoice);
+      db.TemplateTypes.RemoveRange(templateType);
       db.Tickets.Remove(ticket);
       db.SaveChanges();
 

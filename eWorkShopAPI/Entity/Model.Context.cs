@@ -12,6 +12,8 @@ namespace eWorkShopAPI.Entity
   using System;
   using System.Data.Entity;
   using System.Data.Entity.Infrastructure;
+  using System.Data.Entity.Core.Objects;
+  using System.Linq;
 
   public partial class eWorkShop123Entities : DbContext
   {
@@ -38,5 +40,35 @@ namespace eWorkShopAPI.Entity
     public virtual DbSet<UserType> UserTypes { get; set; }
     public virtual DbSet<Warning> Warnings { get; set; }
     public virtual DbSet<TicketInvoice> TicketInvoices { get; set; }
+
+    public virtual ObjectResult<sp_TotalOrdersByDay_Result> sp_TotalOrdersByDay()
+    {
+      return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_TotalOrdersByDay_Result>("sp_TotalOrdersByDay");
+    }
+
+    public virtual ObjectResult<sp_TotalOrdersByMonth_Result> sp_TotalOrdersByMonth()
+    {
+      return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_TotalOrdersByMonth_Result>("sp_TotalOrdersByMonth");
+    }
+
+    public virtual ObjectResult<sp_TotalProductsByDay_Result> sp_TotalProductsByDay()
+    {
+      return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_TotalProductsByDay_Result>("sp_TotalProductsByDay");
+    }
+
+    public virtual ObjectResult<sp_TotalProductsByMonth_Result> sp_TotalProductsByMonth()
+    {
+      return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_TotalProductsByMonth_Result>("sp_TotalProductsByMonth");
+    }
+
+    public virtual ObjectResult<sp_TotalSalesByDay_Result> sp_TotalSalesByDay()
+    {
+      return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_TotalSalesByDay_Result>("sp_TotalSalesByDay");
+    }
+
+    public virtual ObjectResult<sp_TotalSalesByMonth_Result> sp_TotalSalesByMonth()
+    {
+      return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_TotalSalesByMonth_Result>("sp_TotalSalesByMonth");
+    }
   }
 }
